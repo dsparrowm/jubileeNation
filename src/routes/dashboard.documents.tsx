@@ -26,7 +26,7 @@ function DocsPage() {
   return (
     <>
       <PageHeader title="Document Library" description="Policies, circulars, forms, and certificates."
-        actions={<Button className="bg-[--accent-primary] hover:bg-[--accent-hover] text-white" size="sm"><Plus className="h-4 w-4 mr-1.5" /> Upload Document</Button>}
+        actions={<Button className="!bg-[var(--accent-primary)] !text-white hover:!bg-[var(--accent-hover)]" size="sm"><Plus className="h-4 w-4 mr-1.5" /> Upload Document</Button>}
       />
 
       <Card>
@@ -60,7 +60,7 @@ function DocsPage() {
               </div>
               <div className="mt-3 flex gap-2">
                 <Button size="sm" variant="outline" className="flex-1 h-8 text-xs"><Eye className="h-3.5 w-3.5 mr-1" /> Preview</Button>
-                <Button size="sm" className="flex-1 h-8 text-xs bg-[--accent-primary] hover:bg-[--accent-hover] text-white"><Download className="h-3.5 w-3.5 mr-1" /> Download</Button>
+                <Button size="sm" className="flex-1 h-8 text-xs !bg-[var(--accent-primary)] !text-white hover:!bg-[var(--accent-hover)]"><Download className="h-3.5 w-3.5 mr-1" /> Download</Button>
               </div>
             </div>
           ))}

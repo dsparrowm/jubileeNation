@@ -19,7 +19,7 @@ function AnnouncementsPage() {
   return (
     <>
       <PageHeader title="Announcements" description="Org-wide and scoped communications."
-        actions={<Button className="bg-[--accent-primary] hover:bg-[--accent-hover] text-white" size="sm"><Plus className="h-4 w-4 mr-1.5" /> New Announcement</Button>}
+        actions={<Button className="!bg-[var(--accent-primary)] !text-white hover:!bg-[var(--accent-hover)]" size="sm"><Plus className="h-4 w-4 mr-1.5" /> New Announcement</Button>}
       />
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">

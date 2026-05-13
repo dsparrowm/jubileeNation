@@ -34,7 +34,7 @@ function PastorsPage() {
         title="Pastor Directory"
         description={`${pastors.length} pastoral staff across the organisation.`}
         actions={
-          <Button className="bg-[--accent-primary] hover:bg-[--accent-hover] text-white" size="sm">
+          <Button className="!bg-[var(--accent-primary)] !text-white hover:!bg-[var(--accent-hover)]" size="sm">
             <Plus className="h-4 w-4 mr-1.5" /> Add Pastor
           </Button>
         }

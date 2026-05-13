@@ -53,7 +53,7 @@ function PastorProfilePage() {
               <Row icon={Calendar} label={`Ordained ${formatDate(p.ordainedAt)}`} mono />
             </div>
             <div className="mt-5 grid grid-cols-2 gap-2">
-              <Button className="bg-[--accent-primary] hover:bg-[--accent-hover] text-white" size="sm">
+              <Button className="!bg-[var(--accent-primary)] !text-white hover:!bg-[var(--accent-hover)]" size="sm">
                 <ArrowLeftRight className="h-3.5 w-3.5 mr-1" /> Transfer
               </Button>
               <Button variant="outline" size="sm">

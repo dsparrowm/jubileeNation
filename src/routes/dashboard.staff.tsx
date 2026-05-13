@@ -19,7 +19,7 @@ function StaffPage() {
   return (
     <>
       <PageHeader title="Staff Directory" description="Non-pastoral administrative and support staff."
-        actions={<Button className="bg-[--accent-primary] hover:bg-[--accent-hover] text-white" size="sm"><Plus className="h-4 w-4 mr-1.5" /> Add Staff</Button>}
+        actions={<Button className="!bg-[var(--accent-primary)] !text-white hover:!bg-[var(--accent-hover)]" size="sm"><Plus className="h-4 w-4 mr-1.5" /> Add Staff</Button>}
       />
       <Card>
         <table className="w-full text-sm">

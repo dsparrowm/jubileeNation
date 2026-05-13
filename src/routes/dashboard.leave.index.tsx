@@ -22,7 +22,7 @@ function LeavePage() {
   return (
     <>
       <PageHeader title="Leave Management" description="Pastoral leave requests across the organisation."
-        actions={<Link to="/dashboard/leave/apply"><Button className="bg-[--accent-primary] hover:bg-[--accent-hover] text-white" size="sm"><Plus className="h-4 w-4 mr-1.5" /> Apply for Leave</Button></Link>}
+        actions={<Link to="/dashboard/leave/apply"><Button className="!bg-[var(--accent-primary)] !text-white hover:!bg-[var(--accent-hover)]" size="sm"><Plus className="h-4 w-4 mr-1.5" /> Apply for Leave</Button></Link>}
       />
       <Tabs defaultValue="requests">
         <TabsList className="bg-[--bg-surface] border border-[--border-default]">

@@ -18,7 +18,7 @@ function TransfersPage() {
   return (
     <>
       <PageHeader title="Transfers & Appointments" description="Manage pastoral transfers across branches and states."
-        actions={<Button className="bg-[--accent-primary] hover:bg-[--accent-hover] text-white" size="sm"><Plus className="h-4 w-4 mr-1.5" /> Initiate Transfer</Button>}
+        actions={<Button className="!bg-[var(--accent-primary)] !text-white hover:!bg-[var(--accent-hover)]" size="sm"><Plus className="h-4 w-4 mr-1.5" /> Initiate Transfer</Button>}
       />
       <Tabs defaultValue="all">
         <TabsList className="bg-[--bg-surface] border border-[--border-default]">
@@ -83,7 +83,7 @@ function TransfersPage() {
                       <div className="mt-1"><span className="text-[--text-muted]">Effective </span><span className="font-mono">{formatDate(t.effectiveDate)}</span></div>
                     </div>
                     <div className="mt-4 flex gap-2">
-                      <Button size="sm" className="bg-[--state-success] hover:bg-green-700 text-white flex-1">Approve</Button>
+                      <Button size="sm" className="!bg-[var(--state-success)] !text-white hover:!bg-green-700 flex-1">Approve</Button>
                       <Button size="sm" variant="outline" className="flex-1 text-[--state-error] border-[--state-error]/30 hover:bg-red-50">Reject</Button>
                     </div>
                   </div>

@@ -18,7 +18,7 @@ function LeaveApplyPage() {
         </div>
         <h2 className="mt-4 text-xl font-bold">Application Submitted</h2>
         <p className="mt-2 text-sm text-[--text-muted]">Your leave application is now under review. You will receive a notification once a decision is made.</p>
-        <Link to="/dashboard/leave"><Button className="mt-6 bg-[--accent-primary] hover:bg-[--accent-hover] text-white">Back to Leave</Button></Link>
+        <Link to="/dashboard/leave"><Button className="mt-6 !bg-[var(--accent-primary)] !text-white hover:!bg-[var(--accent-hover)]">Back to Leave</Button></Link>
       </div>
     );
   }
@@ -62,7 +62,7 @@ function LeaveApplyPage() {
             </div>
             <div className="flex justify-end gap-2 pt-2 border-t border-[--border-default]">
               <Link to="/dashboard/leave"><Button type="button" variant="outline">Cancel</Button></Link>
-              <Button type="submit" className="bg-[--accent-primary] hover:bg-[--accent-hover] text-white">Submit Application</Button>
+              <Button type="submit" className="!bg-[var(--accent-primary)] !text-white hover:!bg-[var(--accent-hover)]">Submit Application</Button>
             </div>
           </CardBody>
         </form>

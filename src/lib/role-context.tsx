@@ -1,30 +1,42 @@
 import * as React from "react";
-import type { Role } from "@/lib/data/types";
-import { mockUser, mockUserDefaultRole } from "@/lib/auth/mock-user";
+import type { Pastor, Role } from "@/lib/data/types";
+import { demoAccounts, findDemoAccount, mockUser, mockUserDefaultRole } from "@/lib/auth/mock-user";
 
 interface RoleContextValue {
   role: Role;
-  setRole: (r: Role) => void;
-  user: typeof mockUser;
+  setDemoAccount: (email: string) => void;
+  user: Pastor;
 }
 
 const Ctx = React.createContext<RoleContextValue | null>(null);
 
 export function RoleProvider({ children }: { children: React.ReactNode }) {
   const [role, setRoleState] = React.useState<Role>(mockUserDefaultRole);
+  const [user, setUser] = React.useState<Pastor>(mockUser);
 
   // Persist client-side only
   React.useEffect(() => {
-    const saved = typeof window !== "undefined" ? window.localStorage.getItem("jnlop:role") : null;
-    if (saved) setRoleState(saved as Role);
+    const savedEmail =
+      typeof window !== "undefined" ? window.localStorage.getItem("jnlop:demo-email") : null;
+    const account = savedEmail ? findDemoAccount(savedEmail) : demoAccounts[0];
+    if (account) {
+      setRoleState(account.role);
+      setUser(account.user);
+    }
   }, []);
 
-  const setRole = React.useCallback((r: Role) => {
-    setRoleState(r);
-    if (typeof window !== "undefined") window.localStorage.setItem("jnlop:role", r);
+  const setDemoAccount = React.useCallback((email: string) => {
+    const account = findDemoAccount(email);
+    if (!account) return;
+
+    setRoleState(account.role);
+    setUser(account.user);
+    if (typeof window !== "undefined") {
+      window.localStorage.setItem("jnlop:demo-email", account.email);
+    }
   }, []);
 
-  return <Ctx.Provider value={{ role, setRole, user: mockUser }}>{children}</Ctx.Provider>;
+  return <Ctx.Provider value={{ role, setDemoAccount, user }}>{children}</Ctx.Provider>;
 }
 
 export function useRole() {

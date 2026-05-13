@@ -1,14 +1,17 @@
 import * as React from "react";
 import { Link, useRouterState, useNavigate } from "@tanstack/react-router";
-import { Bell, ChevronRight, Menu, ShieldCheck, ChevronDown } from "lucide-react";
+import { Bell, ChevronRight, Menu, ShieldCheck } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useRole, ROLE_LABELS } from "@/lib/role-context";
-import type { Role } from "@/lib/data/types";
 import { notifications } from "@/lib/data/seed";
 import { NotificationsPanel } from "./notifications-panel";
 import {
-  DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem,
-  DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuRadioGroup, DropdownMenuRadioItem,
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
 
 const breadcrumbMap: Record<string, string> = {
@@ -40,10 +43,10 @@ function getBreadcrumb(pathname: string): string {
 
 export function TopBar({ onMenuClick }: { onMenuClick?: () => void }) {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
-  const { role, setRole, user } = useRole();
+  const { role, user } = useRole();
   const navigate = useNavigate();
   const [openNotif, setOpenNotif] = React.useState(false);
-  const unread = notifications.filter(n => !n.read).length;
+  const unread = notifications.filter((n) => !n.read).length;
 
   const crumbParts = getBreadcrumb(pathname).split(" / ");
 
@@ -62,7 +65,14 @@ export function TopBar({ onMenuClick }: { onMenuClick?: () => void }) {
             {crumbParts.map((part, i) => (
               <React.Fragment key={i}>
                 {i > 0 && <ChevronRight className="h-3.5 w-3.5 text-[--text-muted] shrink-0" />}
-                <span className={cn("truncate", i === crumbParts.length - 1 ? "text-[--text-primary] font-medium" : "text-[--text-muted]")}>
+                <span
+                  className={cn(
+                    "truncate",
+                    i === crumbParts.length - 1
+                      ? "text-[--text-primary] font-medium"
+                      : "text-[--text-muted]",
+                  )}
+                >
                   {part}
                 </span>
               </React.Fragment>
@@ -71,23 +81,10 @@ export function TopBar({ onMenuClick }: { onMenuClick?: () => void }) {
         </div>
 
         <div className="flex items-center gap-2">
-          {/* Role switcher */}
-          <DropdownMenu>
-            <DropdownMenuTrigger className="inline-flex items-center gap-2 rounded-md border border-[--border-default] bg-[--bg-base] px-2.5 py-1.5 text-xs font-medium text-[--text-primary] hover:bg-white">
-              <ShieldCheck className="h-3.5 w-3.5 text-[--accent-primary]" />
-              <span className="hidden sm:inline">Viewing as</span>
-              <span className="text-[--accent-primary]">{ROLE_LABELS[role]}</span>
-              <ChevronDown className="h-3 w-3 text-[--text-muted]" />
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-56">
-              <DropdownMenuLabel className="text-xs text-[--text-muted]">Switch role (preview)</DropdownMenuLabel>
-              <DropdownMenuRadioGroup value={role} onValueChange={(v) => setRole(v as Role)}>
-                {(Object.keys(ROLE_LABELS) as Role[]).map((r) => (
-                  <DropdownMenuRadioItem key={r} value={r}>{ROLE_LABELS[r]}</DropdownMenuRadioItem>
-                ))}
-              </DropdownMenuRadioGroup>
-            </DropdownMenuContent>
-          </DropdownMenu>
+          <div className="hidden items-center gap-2 rounded-md border border-[--border-default] bg-[--bg-base] px-2.5 py-1.5 text-xs font-medium text-[--text-primary] sm:inline-flex">
+            <ShieldCheck className="h-3.5 w-3.5 text-[--accent-primary]" />
+            <span className="text-[--accent-primary]">{ROLE_LABELS[role]}</span>
+          </div>
 
           {/* Notifications */}
           <button
@@ -107,19 +104,28 @@ export function TopBar({ onMenuClick }: { onMenuClick?: () => void }) {
           <DropdownMenu>
             <DropdownMenuTrigger className="flex items-center gap-2 rounded-full hover:bg-[--bg-base] p-1 pr-2">
               <div className="flex h-8 w-8 items-center justify-center rounded-full bg-[--bg-sidebar] text-white text-xs font-semibold">
-                {user.firstName[0]}{user.lastName[0]}
+                {user.firstName[0]}
+                {user.lastName[0]}
               </div>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-56">
               <DropdownMenuLabel>
-                <div className="text-sm font-medium">{user.firstName} {user.lastName}</div>
+                <div className="text-sm font-medium">
+                  {user.firstName} {user.lastName}
+                </div>
                 <div className="text-xs text-[--text-muted] font-normal">{user.email}</div>
               </DropdownMenuLabel>
               <DropdownMenuSeparator />
-              <DropdownMenuItem onClick={() => navigate({ to: "/dashboard/settings" })}>Profile</DropdownMenuItem>
-              <DropdownMenuItem onClick={() => navigate({ to: "/dashboard/settings" })}>Settings</DropdownMenuItem>
+              <DropdownMenuItem onClick={() => navigate({ to: "/dashboard/settings" })}>
+                Profile
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => navigate({ to: "/dashboard/settings" })}>
+                Settings
+              </DropdownMenuItem>
               <DropdownMenuSeparator />
-              <DropdownMenuItem onClick={() => navigate({ to: "/login" })}>Sign out</DropdownMenuItem>
+              <DropdownMenuItem onClick={() => navigate({ to: "/login" })}>
+                Sign out
+              </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         </div>

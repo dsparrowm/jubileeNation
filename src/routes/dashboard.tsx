@@ -24,7 +24,7 @@ function DashboardLayout() {
       {mobileOpen && (
         <div className="md:hidden fixed inset-0 z-40 flex">
           <div className="absolute inset-0 bg-black/40" onClick={() => setMobileOpen(false)} />
-          <div className="relative h-full">
+          <div className="relative h-full w-60 bg-[var(--bg-sidebar)] shadow-2xl">
             <Sidebar onNavigate={() => setMobileOpen(false)} />
           </div>
         </div>

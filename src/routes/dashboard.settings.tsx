@@ -37,7 +37,7 @@ function SettingsPage() {
               </div>
             ))}
             <div className="col-span-2 flex justify-end pt-2 border-t border-[--border-default]">
-              <Button className="bg-[--accent-primary] hover:bg-[--accent-hover] text-white">Save Changes</Button>
+              <Button className="!bg-[var(--accent-primary)] !text-white hover:!bg-[var(--accent-hover)]">Save Changes</Button>
             </div>
           </CardBody>
         </Card>

@@ -20,7 +20,7 @@ function EventsPage() {
   return (
     <>
       <PageHeader title="Events & Programmes" description="Upcoming gatherings, conventions, and training across the org."
-        actions={<Button className="bg-[--accent-primary] hover:bg-[--accent-hover] text-white" size="sm"><Plus className="h-4 w-4 mr-1.5" /> Create Event</Button>}
+        actions={<Button className="!bg-[var(--accent-primary)] !text-white hover:!bg-[var(--accent-hover)]" size="sm"><Plus className="h-4 w-4 mr-1.5" /> Create Event</Button>}
       />
       <div className="flex items-center gap-1 mb-4 bg-[--bg-surface] border border-[--border-default] rounded-md p-1 w-fit">
         {(["grid", "calendar"] as const).map(v => (

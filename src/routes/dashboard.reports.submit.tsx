@@ -14,7 +14,7 @@ function SubmitReportPage() {
       <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-green-100 text-[--state-success]"><Check className="h-7 w-7" /></div>
       <h2 className="mt-4 text-xl font-bold">Report Submitted</h2>
       <p className="mt-2 text-sm text-[--text-muted]">Your monthly report has been recorded.</p>
-      <Link to="/dashboard/reports"><Button className="mt-6 bg-[--accent-primary] hover:bg-[--accent-hover] text-white">View Reports</Button></Link>
+      <Link to="/dashboard/reports"><Button className="mt-6 !bg-[var(--accent-primary)] !text-white hover:!bg-[var(--accent-hover)]">View Reports</Button></Link>
     </div>
   );
 
@@ -56,7 +56,7 @@ function SubmitReportPage() {
             </Section>
             <div className="flex justify-end gap-2 pt-2 border-t border-[--border-default]">
               <Link to="/dashboard/reports"><Button type="button" variant="outline">Cancel</Button></Link>
-              <Button type="submit" className="bg-[--accent-primary] hover:bg-[--accent-hover] text-white">Submit Report</Button>
+              <Button type="submit" className="!bg-[var(--accent-primary)] !text-white hover:!bg-[var(--accent-hover)]">Submit Report</Button>
             </div>
           </CardBody>
         </form>

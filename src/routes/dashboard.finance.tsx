@@ -20,7 +20,7 @@ function FinancePage() {
   return (
     <>
       <PageHeader title="Finance & Remittance" description="Branch remittance compliance and payment history."
-        actions={<Button className="bg-[--accent-primary] hover:bg-[--accent-hover] text-white" size="sm"><Plus className="h-4 w-4 mr-1.5" /> Record Payment</Button>}
+        actions={<Button className="!bg-[var(--accent-primary)] !text-white hover:!bg-[var(--accent-hover)]" size="sm"><Plus className="h-4 w-4 mr-1.5" /> Record Payment</Button>}
       />
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">

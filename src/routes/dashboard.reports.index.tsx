@@ -24,7 +24,7 @@ function ReportsPage() {
   return (
     <>
       <PageHeader title="Branch Reports" description="Monthly compliance grid and full submission archive."
-        actions={<Link to="/dashboard/reports/submit"><Button className="bg-[--accent-primary] hover:bg-[--accent-hover] text-white" size="sm"><Plus className="h-4 w-4 mr-1.5" /> Submit Report</Button></Link>}
+        actions={<Link to="/dashboard/reports/submit"><Button className="!bg-[var(--accent-primary)] !text-white hover:!bg-[var(--accent-hover)]" size="sm"><Plus className="h-4 w-4 mr-1.5" /> Submit Report</Button></Link>}
       />
 
       <Card>

@@ -41,7 +41,7 @@ function BranchesPage() {
         title="Branch Directory"
         description={`${branches.length} branches across ${states.length} states.`}
         actions={
-          <Button className="bg-[--accent-primary] hover:bg-[--accent-hover] text-white" size="sm">
+          <Button className="!bg-[var(--accent-primary)] !text-white hover:!bg-[var(--accent-hover)]" size="sm">
             <Plus className="h-4 w-4 mr-1.5" /> Add Branch
           </Button>
         }
@@ -218,7 +218,7 @@ function BranchDrawer({ branch, onClose }: { branch: typeof branches[0]; onClose
 
           <div className="flex gap-2 pt-2 border-t border-[--border-default]">
             <Button variant="outline" className="flex-1">Edit Branch</Button>
-            <Button className="bg-[--accent-primary] hover:bg-[--accent-hover] text-white flex-1">Transfer Pastor</Button>
+            <Button className="!bg-[var(--accent-primary)] !text-white hover:!bg-[var(--accent-hover)] flex-1">Transfer Pastor</Button>
           </div>
         </div>
       </aside>
