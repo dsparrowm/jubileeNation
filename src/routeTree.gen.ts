@@ -13,6 +13,10 @@ import { Route as LoginRouteImport } from './routes/login'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as DashboardIndexRouteImport } from './routes/dashboard.index'
+import { Route as DashboardOrgStructureRouteImport } from './routes/dashboard.org-structure'
+import { Route as DashboardBranchesRouteImport } from './routes/dashboard.branches'
+import { Route as DashboardPastorsIndexRouteImport } from './routes/dashboard.pastors.index'
+import { Route as DashboardPastorsIdRouteImport } from './routes/dashboard.pastors.$id'
 
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
@@ -34,31 +38,87 @@ const DashboardIndexRoute = DashboardIndexRouteImport.update({
   path: '/',
   getParentRoute: () => DashboardRoute,
 } as any)
+const DashboardOrgStructureRoute = DashboardOrgStructureRouteImport.update({
+  id: '/org-structure',
+  path: '/org-structure',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardBranchesRoute = DashboardBranchesRouteImport.update({
+  id: '/branches',
+  path: '/branches',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardPastorsIndexRoute = DashboardPastorsIndexRouteImport.update({
+  id: '/pastors/',
+  path: '/pastors/',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardPastorsIdRoute = DashboardPastorsIdRouteImport.update({
+  id: '/pastors/$id',
+  path: '/pastors/$id',
+  getParentRoute: () => DashboardRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/dashboard': typeof DashboardRouteWithChildren
   '/login': typeof LoginRoute
+  '/dashboard/branches': typeof DashboardBranchesRoute
+  '/dashboard/org-structure': typeof DashboardOrgStructureRoute
   '/dashboard/': typeof DashboardIndexRoute
+  '/dashboard/pastors/$id': typeof DashboardPastorsIdRoute
+  '/dashboard/pastors/': typeof DashboardPastorsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
+  '/dashboard/branches': typeof DashboardBranchesRoute
+  '/dashboard/org-structure': typeof DashboardOrgStructureRoute
   '/dashboard': typeof DashboardIndexRoute
+  '/dashboard/pastors/$id': typeof DashboardPastorsIdRoute
+  '/dashboard/pastors': typeof DashboardPastorsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/dashboard': typeof DashboardRouteWithChildren
   '/login': typeof LoginRoute
+  '/dashboard/branches': typeof DashboardBranchesRoute
+  '/dashboard/org-structure': typeof DashboardOrgStructureRoute
   '/dashboard/': typeof DashboardIndexRoute
+  '/dashboard/pastors/$id': typeof DashboardPastorsIdRoute
+  '/dashboard/pastors/': typeof DashboardPastorsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/dashboard' | '/login' | '/dashboard/'
+  fullPaths:
+    | '/'
+    | '/dashboard'
+    | '/login'
+    | '/dashboard/branches'
+    | '/dashboard/org-structure'
+    | '/dashboard/'
+    | '/dashboard/pastors/$id'
+    | '/dashboard/pastors/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/login' | '/dashboard'
-  id: '__root__' | '/' | '/dashboard' | '/login' | '/dashboard/'
+  to:
+    | '/'
+    | '/login'
+    | '/dashboard/branches'
+    | '/dashboard/org-structure'
+    | '/dashboard'
+    | '/dashboard/pastors/$id'
+    | '/dashboard/pastors'
+  id:
+    | '__root__'
+    | '/'
+    | '/dashboard'
+    | '/login'
+    | '/dashboard/branches'
+    | '/dashboard/org-structure'
+    | '/dashboard/'
+    | '/dashboard/pastors/$id'
+    | '/dashboard/pastors/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -97,15 +157,51 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardIndexRouteImport
       parentRoute: typeof DashboardRoute
     }
+    '/dashboard/org-structure': {
+      id: '/dashboard/org-structure'
+      path: '/org-structure'
+      fullPath: '/dashboard/org-structure'
+      preLoaderRoute: typeof DashboardOrgStructureRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/branches': {
+      id: '/dashboard/branches'
+      path: '/branches'
+      fullPath: '/dashboard/branches'
+      preLoaderRoute: typeof DashboardBranchesRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/pastors/': {
+      id: '/dashboard/pastors/'
+      path: '/pastors'
+      fullPath: '/dashboard/pastors/'
+      preLoaderRoute: typeof DashboardPastorsIndexRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/pastors/$id': {
+      id: '/dashboard/pastors/$id'
+      path: '/pastors/$id'
+      fullPath: '/dashboard/pastors/$id'
+      preLoaderRoute: typeof DashboardPastorsIdRouteImport
+      parentRoute: typeof DashboardRoute
+    }
   }
 }
 
 interface DashboardRouteChildren {
+  DashboardBranchesRoute: typeof DashboardBranchesRoute
+  DashboardOrgStructureRoute: typeof DashboardOrgStructureRoute
   DashboardIndexRoute: typeof DashboardIndexRoute
+  DashboardPastorsIdRoute: typeof DashboardPastorsIdRoute
+  DashboardPastorsIndexRoute: typeof DashboardPastorsIndexRoute
 }
 
 const DashboardRouteChildren: DashboardRouteChildren = {
+  DashboardBranchesRoute: DashboardBranchesRoute,
+  DashboardOrgStructureRoute: DashboardOrgStructureRoute,
   DashboardIndexRoute: DashboardIndexRoute,
+  DashboardPastorsIdRoute: DashboardPastorsIdRoute,
+  DashboardPastorsIndexRoute: DashboardPastorsIndexRoute,
 }
 
 const DashboardRouteWithChildren = DashboardRoute._addFileChildren(
@@ -120,3 +216,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
