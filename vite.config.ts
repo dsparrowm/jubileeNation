@@ -5,7 +5,7 @@ import { nitro } from "nitro/vite";
 // @cloudflare/vite-plugin builds from this — wrangler.jsonc main alone is insufficient.
 export default defineConfig({
   cloudflare: false,
-  plugins: [nitro()],
+  plugins: [nitro({ preset: "vercel" })],
   tanstackStart: {
     server: { entry: "server" },
   },

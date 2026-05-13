@@ -1,5 +1,5 @@
 import * as React from "react";
-import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Eye, EyeOff, Lock, Mail } from "lucide-react";
 import { demoAccounts, findDemoAccount } from "@/lib/auth/mock-user";
 import { ROLE_LABELS, useRole } from "@/lib/role-context";
@@ -10,7 +10,6 @@ export const Route = createFileRoute("/login")({
 });
 
 function LoginPage() {
-  const navigate = useNavigate();
   const { setDemoAccount } = useRole();
   const [showPw, setShowPw] = React.useState(false);
   const [email, setEmail] = React.useState("admin@jnic.org");
@@ -27,7 +26,7 @@ function LoginPage() {
     setErrors(errs);
     if (account && Object.keys(errs).length === 0) {
       setDemoAccount(account.email);
-      navigate({ to: "/dashboard" });
+      window.location.assign("/dashboard");
     }
   };
 
