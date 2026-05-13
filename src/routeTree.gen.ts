@@ -13,10 +13,23 @@ import { Route as LoginRouteImport } from './routes/login'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as DashboardIndexRouteImport } from './routes/dashboard.index'
+import { Route as DashboardTransfersRouteImport } from './routes/dashboard.transfers'
+import { Route as DashboardStaffRouteImport } from './routes/dashboard.staff'
+import { Route as DashboardSettingsRouteImport } from './routes/dashboard.settings'
 import { Route as DashboardOrgStructureRouteImport } from './routes/dashboard.org-structure'
+import { Route as DashboardFinanceRouteImport } from './routes/dashboard.finance'
+import { Route as DashboardDocumentsRouteImport } from './routes/dashboard.documents'
 import { Route as DashboardBranchesRouteImport } from './routes/dashboard.branches'
+import { Route as DashboardAnnouncementsRouteImport } from './routes/dashboard.announcements'
+import { Route as DashboardAnalyticsRouteImport } from './routes/dashboard.analytics'
+import { Route as DashboardReportsIndexRouteImport } from './routes/dashboard.reports.index'
 import { Route as DashboardPastorsIndexRouteImport } from './routes/dashboard.pastors.index'
+import { Route as DashboardLeaveIndexRouteImport } from './routes/dashboard.leave.index'
+import { Route as DashboardEventsIndexRouteImport } from './routes/dashboard.events.index'
+import { Route as DashboardReportsSubmitRouteImport } from './routes/dashboard.reports.submit'
 import { Route as DashboardPastorsIdRouteImport } from './routes/dashboard.pastors.$id'
+import { Route as DashboardLeaveApplyRouteImport } from './routes/dashboard.leave.apply'
+import { Route as DashboardEventsIdRouteImport } from './routes/dashboard.events.$id'
 
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
@@ -38,9 +51,34 @@ const DashboardIndexRoute = DashboardIndexRouteImport.update({
   path: '/',
   getParentRoute: () => DashboardRoute,
 } as any)
+const DashboardTransfersRoute = DashboardTransfersRouteImport.update({
+  id: '/transfers',
+  path: '/transfers',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardStaffRoute = DashboardStaffRouteImport.update({
+  id: '/staff',
+  path: '/staff',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardSettingsRoute = DashboardSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => DashboardRoute,
+} as any)
 const DashboardOrgStructureRoute = DashboardOrgStructureRouteImport.update({
   id: '/org-structure',
   path: '/org-structure',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardFinanceRoute = DashboardFinanceRouteImport.update({
+  id: '/finance',
+  path: '/finance',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardDocumentsRoute = DashboardDocumentsRouteImport.update({
+  id: '/documents',
+  path: '/documents',
   getParentRoute: () => DashboardRoute,
 } as any)
 const DashboardBranchesRoute = DashboardBranchesRouteImport.update({
@@ -48,9 +86,39 @@ const DashboardBranchesRoute = DashboardBranchesRouteImport.update({
   path: '/branches',
   getParentRoute: () => DashboardRoute,
 } as any)
+const DashboardAnnouncementsRoute = DashboardAnnouncementsRouteImport.update({
+  id: '/announcements',
+  path: '/announcements',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardAnalyticsRoute = DashboardAnalyticsRouteImport.update({
+  id: '/analytics',
+  path: '/analytics',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardReportsIndexRoute = DashboardReportsIndexRouteImport.update({
+  id: '/reports/',
+  path: '/reports/',
+  getParentRoute: () => DashboardRoute,
+} as any)
 const DashboardPastorsIndexRoute = DashboardPastorsIndexRouteImport.update({
   id: '/pastors/',
   path: '/pastors/',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardLeaveIndexRoute = DashboardLeaveIndexRouteImport.update({
+  id: '/leave/',
+  path: '/leave/',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardEventsIndexRoute = DashboardEventsIndexRouteImport.update({
+  id: '/events/',
+  path: '/events/',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardReportsSubmitRoute = DashboardReportsSubmitRouteImport.update({
+  id: '/reports/submit',
+  path: '/reports/submit',
   getParentRoute: () => DashboardRoute,
 } as any)
 const DashboardPastorsIdRoute = DashboardPastorsIdRouteImport.update({
@@ -58,36 +126,85 @@ const DashboardPastorsIdRoute = DashboardPastorsIdRouteImport.update({
   path: '/pastors/$id',
   getParentRoute: () => DashboardRoute,
 } as any)
+const DashboardLeaveApplyRoute = DashboardLeaveApplyRouteImport.update({
+  id: '/leave/apply',
+  path: '/leave/apply',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardEventsIdRoute = DashboardEventsIdRouteImport.update({
+  id: '/events/$id',
+  path: '/events/$id',
+  getParentRoute: () => DashboardRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/dashboard': typeof DashboardRouteWithChildren
   '/login': typeof LoginRoute
+  '/dashboard/analytics': typeof DashboardAnalyticsRoute
+  '/dashboard/announcements': typeof DashboardAnnouncementsRoute
   '/dashboard/branches': typeof DashboardBranchesRoute
+  '/dashboard/documents': typeof DashboardDocumentsRoute
+  '/dashboard/finance': typeof DashboardFinanceRoute
   '/dashboard/org-structure': typeof DashboardOrgStructureRoute
+  '/dashboard/settings': typeof DashboardSettingsRoute
+  '/dashboard/staff': typeof DashboardStaffRoute
+  '/dashboard/transfers': typeof DashboardTransfersRoute
   '/dashboard/': typeof DashboardIndexRoute
+  '/dashboard/events/$id': typeof DashboardEventsIdRoute
+  '/dashboard/leave/apply': typeof DashboardLeaveApplyRoute
   '/dashboard/pastors/$id': typeof DashboardPastorsIdRoute
+  '/dashboard/reports/submit': typeof DashboardReportsSubmitRoute
+  '/dashboard/events/': typeof DashboardEventsIndexRoute
+  '/dashboard/leave/': typeof DashboardLeaveIndexRoute
   '/dashboard/pastors/': typeof DashboardPastorsIndexRoute
+  '/dashboard/reports/': typeof DashboardReportsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
+  '/dashboard/analytics': typeof DashboardAnalyticsRoute
+  '/dashboard/announcements': typeof DashboardAnnouncementsRoute
   '/dashboard/branches': typeof DashboardBranchesRoute
+  '/dashboard/documents': typeof DashboardDocumentsRoute
+  '/dashboard/finance': typeof DashboardFinanceRoute
   '/dashboard/org-structure': typeof DashboardOrgStructureRoute
+  '/dashboard/settings': typeof DashboardSettingsRoute
+  '/dashboard/staff': typeof DashboardStaffRoute
+  '/dashboard/transfers': typeof DashboardTransfersRoute
   '/dashboard': typeof DashboardIndexRoute
+  '/dashboard/events/$id': typeof DashboardEventsIdRoute
+  '/dashboard/leave/apply': typeof DashboardLeaveApplyRoute
   '/dashboard/pastors/$id': typeof DashboardPastorsIdRoute
+  '/dashboard/reports/submit': typeof DashboardReportsSubmitRoute
+  '/dashboard/events': typeof DashboardEventsIndexRoute
+  '/dashboard/leave': typeof DashboardLeaveIndexRoute
   '/dashboard/pastors': typeof DashboardPastorsIndexRoute
+  '/dashboard/reports': typeof DashboardReportsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/dashboard': typeof DashboardRouteWithChildren
   '/login': typeof LoginRoute
+  '/dashboard/analytics': typeof DashboardAnalyticsRoute
+  '/dashboard/announcements': typeof DashboardAnnouncementsRoute
   '/dashboard/branches': typeof DashboardBranchesRoute
+  '/dashboard/documents': typeof DashboardDocumentsRoute
+  '/dashboard/finance': typeof DashboardFinanceRoute
   '/dashboard/org-structure': typeof DashboardOrgStructureRoute
+  '/dashboard/settings': typeof DashboardSettingsRoute
+  '/dashboard/staff': typeof DashboardStaffRoute
+  '/dashboard/transfers': typeof DashboardTransfersRoute
   '/dashboard/': typeof DashboardIndexRoute
+  '/dashboard/events/$id': typeof DashboardEventsIdRoute
+  '/dashboard/leave/apply': typeof DashboardLeaveApplyRoute
   '/dashboard/pastors/$id': typeof DashboardPastorsIdRoute
+  '/dashboard/reports/submit': typeof DashboardReportsSubmitRoute
+  '/dashboard/events/': typeof DashboardEventsIndexRoute
+  '/dashboard/leave/': typeof DashboardLeaveIndexRoute
   '/dashboard/pastors/': typeof DashboardPastorsIndexRoute
+  '/dashboard/reports/': typeof DashboardReportsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -95,30 +212,69 @@ export interface FileRouteTypes {
     | '/'
     | '/dashboard'
     | '/login'
+    | '/dashboard/analytics'
+    | '/dashboard/announcements'
     | '/dashboard/branches'
+    | '/dashboard/documents'
+    | '/dashboard/finance'
     | '/dashboard/org-structure'
+    | '/dashboard/settings'
+    | '/dashboard/staff'
+    | '/dashboard/transfers'
     | '/dashboard/'
+    | '/dashboard/events/$id'
+    | '/dashboard/leave/apply'
     | '/dashboard/pastors/$id'
+    | '/dashboard/reports/submit'
+    | '/dashboard/events/'
+    | '/dashboard/leave/'
     | '/dashboard/pastors/'
+    | '/dashboard/reports/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/login'
+    | '/dashboard/analytics'
+    | '/dashboard/announcements'
     | '/dashboard/branches'
+    | '/dashboard/documents'
+    | '/dashboard/finance'
     | '/dashboard/org-structure'
+    | '/dashboard/settings'
+    | '/dashboard/staff'
+    | '/dashboard/transfers'
     | '/dashboard'
+    | '/dashboard/events/$id'
+    | '/dashboard/leave/apply'
     | '/dashboard/pastors/$id'
+    | '/dashboard/reports/submit'
+    | '/dashboard/events'
+    | '/dashboard/leave'
     | '/dashboard/pastors'
+    | '/dashboard/reports'
   id:
     | '__root__'
     | '/'
     | '/dashboard'
     | '/login'
+    | '/dashboard/analytics'
+    | '/dashboard/announcements'
     | '/dashboard/branches'
+    | '/dashboard/documents'
+    | '/dashboard/finance'
     | '/dashboard/org-structure'
+    | '/dashboard/settings'
+    | '/dashboard/staff'
+    | '/dashboard/transfers'
     | '/dashboard/'
+    | '/dashboard/events/$id'
+    | '/dashboard/leave/apply'
     | '/dashboard/pastors/$id'
+    | '/dashboard/reports/submit'
+    | '/dashboard/events/'
+    | '/dashboard/leave/'
     | '/dashboard/pastors/'
+    | '/dashboard/reports/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -157,11 +313,46 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardIndexRouteImport
       parentRoute: typeof DashboardRoute
     }
+    '/dashboard/transfers': {
+      id: '/dashboard/transfers'
+      path: '/transfers'
+      fullPath: '/dashboard/transfers'
+      preLoaderRoute: typeof DashboardTransfersRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/staff': {
+      id: '/dashboard/staff'
+      path: '/staff'
+      fullPath: '/dashboard/staff'
+      preLoaderRoute: typeof DashboardStaffRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/settings': {
+      id: '/dashboard/settings'
+      path: '/settings'
+      fullPath: '/dashboard/settings'
+      preLoaderRoute: typeof DashboardSettingsRouteImport
+      parentRoute: typeof DashboardRoute
+    }
     '/dashboard/org-structure': {
       id: '/dashboard/org-structure'
       path: '/org-structure'
       fullPath: '/dashboard/org-structure'
       preLoaderRoute: typeof DashboardOrgStructureRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/finance': {
+      id: '/dashboard/finance'
+      path: '/finance'
+      fullPath: '/dashboard/finance'
+      preLoaderRoute: typeof DashboardFinanceRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/documents': {
+      id: '/dashboard/documents'
+      path: '/documents'
+      fullPath: '/dashboard/documents'
+      preLoaderRoute: typeof DashboardDocumentsRouteImport
       parentRoute: typeof DashboardRoute
     }
     '/dashboard/branches': {
@@ -171,11 +362,53 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardBranchesRouteImport
       parentRoute: typeof DashboardRoute
     }
+    '/dashboard/announcements': {
+      id: '/dashboard/announcements'
+      path: '/announcements'
+      fullPath: '/dashboard/announcements'
+      preLoaderRoute: typeof DashboardAnnouncementsRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/analytics': {
+      id: '/dashboard/analytics'
+      path: '/analytics'
+      fullPath: '/dashboard/analytics'
+      preLoaderRoute: typeof DashboardAnalyticsRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/reports/': {
+      id: '/dashboard/reports/'
+      path: '/reports'
+      fullPath: '/dashboard/reports/'
+      preLoaderRoute: typeof DashboardReportsIndexRouteImport
+      parentRoute: typeof DashboardRoute
+    }
     '/dashboard/pastors/': {
       id: '/dashboard/pastors/'
       path: '/pastors'
       fullPath: '/dashboard/pastors/'
       preLoaderRoute: typeof DashboardPastorsIndexRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/leave/': {
+      id: '/dashboard/leave/'
+      path: '/leave'
+      fullPath: '/dashboard/leave/'
+      preLoaderRoute: typeof DashboardLeaveIndexRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/events/': {
+      id: '/dashboard/events/'
+      path: '/events'
+      fullPath: '/dashboard/events/'
+      preLoaderRoute: typeof DashboardEventsIndexRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/reports/submit': {
+      id: '/dashboard/reports/submit'
+      path: '/reports/submit'
+      fullPath: '/dashboard/reports/submit'
+      preLoaderRoute: typeof DashboardReportsSubmitRouteImport
       parentRoute: typeof DashboardRoute
     }
     '/dashboard/pastors/$id': {
@@ -185,23 +418,63 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardPastorsIdRouteImport
       parentRoute: typeof DashboardRoute
     }
+    '/dashboard/leave/apply': {
+      id: '/dashboard/leave/apply'
+      path: '/leave/apply'
+      fullPath: '/dashboard/leave/apply'
+      preLoaderRoute: typeof DashboardLeaveApplyRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/events/$id': {
+      id: '/dashboard/events/$id'
+      path: '/events/$id'
+      fullPath: '/dashboard/events/$id'
+      preLoaderRoute: typeof DashboardEventsIdRouteImport
+      parentRoute: typeof DashboardRoute
+    }
   }
 }
 
 interface DashboardRouteChildren {
+  DashboardAnalyticsRoute: typeof DashboardAnalyticsRoute
+  DashboardAnnouncementsRoute: typeof DashboardAnnouncementsRoute
   DashboardBranchesRoute: typeof DashboardBranchesRoute
+  DashboardDocumentsRoute: typeof DashboardDocumentsRoute
+  DashboardFinanceRoute: typeof DashboardFinanceRoute
   DashboardOrgStructureRoute: typeof DashboardOrgStructureRoute
+  DashboardSettingsRoute: typeof DashboardSettingsRoute
+  DashboardStaffRoute: typeof DashboardStaffRoute
+  DashboardTransfersRoute: typeof DashboardTransfersRoute
   DashboardIndexRoute: typeof DashboardIndexRoute
+  DashboardEventsIdRoute: typeof DashboardEventsIdRoute
+  DashboardLeaveApplyRoute: typeof DashboardLeaveApplyRoute
   DashboardPastorsIdRoute: typeof DashboardPastorsIdRoute
+  DashboardReportsSubmitRoute: typeof DashboardReportsSubmitRoute
+  DashboardEventsIndexRoute: typeof DashboardEventsIndexRoute
+  DashboardLeaveIndexRoute: typeof DashboardLeaveIndexRoute
   DashboardPastorsIndexRoute: typeof DashboardPastorsIndexRoute
+  DashboardReportsIndexRoute: typeof DashboardReportsIndexRoute
 }
 
 const DashboardRouteChildren: DashboardRouteChildren = {
+  DashboardAnalyticsRoute: DashboardAnalyticsRoute,
+  DashboardAnnouncementsRoute: DashboardAnnouncementsRoute,
   DashboardBranchesRoute: DashboardBranchesRoute,
+  DashboardDocumentsRoute: DashboardDocumentsRoute,
+  DashboardFinanceRoute: DashboardFinanceRoute,
   DashboardOrgStructureRoute: DashboardOrgStructureRoute,
+  DashboardSettingsRoute: DashboardSettingsRoute,
+  DashboardStaffRoute: DashboardStaffRoute,
+  DashboardTransfersRoute: DashboardTransfersRoute,
   DashboardIndexRoute: DashboardIndexRoute,
+  DashboardEventsIdRoute: DashboardEventsIdRoute,
+  DashboardLeaveApplyRoute: DashboardLeaveApplyRoute,
   DashboardPastorsIdRoute: DashboardPastorsIdRoute,
+  DashboardReportsSubmitRoute: DashboardReportsSubmitRoute,
+  DashboardEventsIndexRoute: DashboardEventsIndexRoute,
+  DashboardLeaveIndexRoute: DashboardLeaveIndexRoute,
   DashboardPastorsIndexRoute: DashboardPastorsIndexRoute,
+  DashboardReportsIndexRoute: DashboardReportsIndexRoute,
 }
 
 const DashboardRouteWithChildren = DashboardRoute._addFileChildren(
