@@ -18,14 +18,14 @@ function LeaveApplyPage() {
         </div>
         <h2 className="mt-4 text-xl font-bold">Application Submitted</h2>
         <p className="mt-2 text-sm text-[--text-muted]">Your leave application is now under review. You will receive a notification once a decision is made.</p>
-        <Link to="/dashboard/leave"><Button className="mt-6 !bg-[var(--accent-primary)] !text-white hover:!bg-[var(--accent-hover)]">Back to Leave</Button></Link>
+        <Link to="/dashboard/leave/my"><Button className="mt-6 !bg-[var(--accent-primary)] !text-white hover:!bg-[var(--accent-hover)]">View My Leave</Button></Link>
       </div>
     );
   }
 
   return (
     <>
-      <Link to="/dashboard/leave" className="inline-flex items-center gap-1 text-sm text-[--text-muted] hover:text-[--text-primary] mb-3">
+      <Link to="/dashboard/leave/my" className="inline-flex items-center gap-1 text-sm text-[--text-muted] hover:text-[--text-primary] mb-3">
         <ArrowLeft className="h-3.5 w-3.5" /> Back
       </Link>
       <PageHeader title="Apply for Leave" description="Submit a new leave application." />
@@ -61,7 +61,7 @@ function LeaveApplyPage() {
               </div>
             </div>
             <div className="flex justify-end gap-2 pt-2 border-t border-[--border-default]">
-              <Link to="/dashboard/leave"><Button type="button" variant="outline">Cancel</Button></Link>
+              <Link to="/dashboard/leave/my"><Button type="button" variant="outline">Cancel</Button></Link>
               <Button type="submit" className="!bg-[var(--accent-primary)] !text-white hover:!bg-[var(--accent-hover)]">Submit Application</Button>
             </div>
           </CardBody>

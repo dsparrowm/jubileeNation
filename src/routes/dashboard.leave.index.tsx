@@ -6,7 +6,10 @@ import { Card } from "@/components/ui-kit/card";
 import { Button } from "@/components/ui/button";
 import { StatusBadge } from "@/components/ui-kit/badges";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import { leaveRequests, pastorName, findPastor, branchName, stateName } from "@/lib/data/seed";
+import { useMockStore } from "@/lib/data/mock-store";
+import { filterLeaveByState } from "@/lib/data/filters";
+import { useRole } from "@/lib/role-context";
+import { pastorName, findPastor, branchName } from "@/lib/data/seed";
 import { formatDate, daysBetween, initials } from "@/lib/format";
 
 export const Route = createFileRoute("/dashboard/leave/")({ component: LeavePage });
@@ -19,10 +22,25 @@ const leaveTypeColor: Record<string, string> = {
 };
 
 function LeavePage() {
+  const { role, user } = useRole();
+  const { leaveRequests, approveLeave, rejectLeave } = useMockStore();
+  const scoped = filterLeaveByState(
+    { role, user },
+    leaveRequests,
+    (pid) => findPastor(pid)?.stateId,
+  );
+
+  const isStatePastor = role === "STATE_PASTOR";
+  const description = isStatePastor
+    ? "Pastoral leave requests in your state."
+    : "Pastoral leave requests across the organisation.";
+
   return (
     <>
-      <PageHeader title="Leave Management" description="Pastoral leave requests across the organisation."
-        actions={<Link to="/dashboard/leave/apply"><Button className="!bg-[var(--accent-primary)] !text-white hover:!bg-[var(--accent-hover)]" size="sm"><Plus className="h-4 w-4 mr-1.5" /> Apply for Leave</Button></Link>}
+      <PageHeader title="Leave Management" description={description}
+        actions={!isStatePastor ? (
+          <Link to="/dashboard/leave/apply"><Button className="!bg-[var(--accent-primary)] !text-white hover:!bg-[var(--accent-hover)]" size="sm"><Plus className="h-4 w-4 mr-1.5" /> Apply for Leave</Button></Link>
+        ) : undefined}
       />
       <Tabs defaultValue="requests">
         <TabsList className="bg-[--bg-surface] border border-[--border-default]">
@@ -47,7 +65,7 @@ function LeavePage() {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-[--border-default]">
-                  {leaveRequests.map(l => {
+                  {scoped.map(l => {
                     const p = findPastor(l.pastorId)!;
                     return (
                       <tr key={l.id} className="hover:bg-[--bg-base]/50">
@@ -65,8 +83,8 @@ function LeavePage() {
                         <td className="px-5 py-3 text-right">
                           {l.status === "Pending" ? (
                             <div className="flex gap-1 justify-end">
-                              <Button size="sm" variant="outline" className="h-7 text-xs text-[--state-success]">Approve</Button>
-                              <Button size="sm" variant="outline" className="h-7 text-xs text-[--state-error]">Reject</Button>
+                              <Button size="sm" variant="outline" className="h-7 text-xs text-[--state-success]" onClick={() => approveLeave(l.id, user.id)}>Approve</Button>
+                              <Button size="sm" variant="outline" className="h-7 text-xs text-[--state-error]" onClick={() => rejectLeave(l.id, user.id)}>Reject</Button>
                             </div>
                           ) : <button className="text-xs text-[--accent-primary] font-medium">View</button>}
                         </td>
@@ -91,7 +109,7 @@ function LeavePage() {
                   {Array.from({ length: 35 }).map((_, i) => {
                     const day = i - 2; // start offset
                     const dayLeaves = day > 0 && day <= 31
-                      ? leaveRequests.filter(l => {
+                      ? scoped.filter(l => {
                           const d = new Date(`2025-05-${String(day).padStart(2, "0")}`);
                           return d >= new Date(l.fromDate) && d <= new Date(l.toDate) && l.status !== "Rejected";
                         })

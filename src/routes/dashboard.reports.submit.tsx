@@ -4,16 +4,34 @@ import { ArrowLeft, Check } from "lucide-react";
 import { PageHeader } from "@/components/layout/page-header";
 import { Card, CardBody } from "@/components/ui-kit/card";
 import { Button } from "@/components/ui/button";
+import { useMockStore } from "@/lib/data/mock-store";
+import { filterBranches } from "@/lib/data/filters";
+import { useRole } from "@/lib/role-context";
+import { branches } from "@/lib/data/seed";
 
 export const Route = createFileRoute("/dashboard/reports/submit")({ component: SubmitReportPage });
 
+const CURRENT_PERIOD = "Apr 2025";
+
 function SubmitReportPage() {
+  const { role, user } = useRole();
+  const { submitReport } = useMockStore();
   const [done, setDone] = React.useState(false);
+  const stateBranches = filterBranches({ role, user }, branches);
+  const defaultBranchId =
+    role === "BRANCH_PASTOR" && user.branchId
+      ? user.branchId
+      : stateBranches[0]?.id ?? "";
+  const [branchId, setBranchId] = React.useState(defaultBranchId);
+  const isStatePastor = role === "STATE_PASTOR";
+
   if (done) return (
     <div className="max-w-xl mx-auto py-16 text-center">
       <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-green-100 text-[--state-success]"><Check className="h-7 w-7" /></div>
       <h2 className="mt-4 text-xl font-bold">Report Submitted</h2>
-      <p className="mt-2 text-sm text-[--text-muted]">Your monthly report has been recorded.</p>
+      <p className="mt-2 text-sm text-[--text-muted]">
+        {isStatePastor ? "The branch report has been recorded on behalf of the branch." : "Your monthly report has been recorded."}
+      </p>
       <Link to="/dashboard/reports"><Button className="mt-6 !bg-[var(--accent-primary)] !text-white hover:!bg-[var(--accent-hover)]">View Reports</Button></Link>
     </div>
   );
@@ -21,10 +39,37 @@ function SubmitReportPage() {
   return (
     <>
       <Link to="/dashboard/reports" className="inline-flex items-center gap-1 text-sm text-[--text-muted] hover:text-[--text-primary] mb-3"><ArrowLeft className="h-3.5 w-3.5" /> Back</Link>
-      <PageHeader title="Submit Monthly Report" description="Branch metrics for the current reporting period." />
+      <PageHeader
+        title={isStatePastor ? "Submit Report on Behalf of Branch" : "Submit Monthly Report"}
+        description={
+          isStatePastor
+            ? "Submit a monthly branch report for any branch in your state."
+            : "Branch metrics for the current reporting period."
+        }
+      />
       <Card>
-        <form onSubmit={(e) => { e.preventDefault(); setDone(true); }}>
+        <form onSubmit={(e) => {
+          e.preventDefault();
+          const targetBranch = branchId || user.branchId;
+          if (targetBranch) submitReport(targetBranch, user.id, CURRENT_PERIOD);
+          setDone(true);
+        }}>
           <CardBody className="space-y-6 max-w-3xl">
+            {isStatePastor && (
+              <div>
+                <label className="text-sm font-semibold">Branch</label>
+                <select
+                  value={branchId}
+                  onChange={(e) => setBranchId(e.target.value)}
+                  className="mt-1.5 w-full rounded-md border border-[--border-default] px-3 py-2 text-sm"
+                  required
+                >
+                  {stateBranches.map((b) => (
+                    <option key={b.id} value={b.id}>{b.name}</option>
+                  ))}
+                </select>
+              </div>
+            )}
             <Section title="Attendance">
               <div className="grid grid-cols-3 gap-3">
                 <NumField label="Adults" />

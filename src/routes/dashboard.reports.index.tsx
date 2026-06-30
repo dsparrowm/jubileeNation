@@ -5,13 +5,24 @@ import { PageHeader } from "@/components/layout/page-header";
 import { Card, CardHeader, CardTitle } from "@/components/ui-kit/card";
 import { Button } from "@/components/ui/button";
 import { StatusBadge } from "@/components/ui-kit/badges";
-import { reports, branches, states, stateName, branchName, pastorName } from "@/lib/data/seed";
+import { useMockStore } from "@/lib/data/mock-store";
+import { filterReports, filterBranches } from "@/lib/data/filters";
+import { useRole } from "@/lib/role-context";
+import { branches, states, stateName, branchName, pastorName } from "@/lib/data/seed";
 import { formatDate } from "@/lib/format";
 
 export const Route = createFileRoute("/dashboard/reports/")({ component: ReportsPage });
 
 function ReportsPage() {
-  const aprilReports = reports.filter(r => r.period === "Apr 2025");
+  const { role, user } = useRole();
+  const { reports } = useMockStore();
+  const scopedBranches = filterBranches({ role, user }, branches);
+  const scopedReports = filterReports({ role, user }, reports, branches);
+  const aprilReports = scopedReports.filter(r => r.period === "Apr 2025");
+  const gridStates =
+    role === "STATE_PASTOR" && user.stateId
+      ? states.filter((s) => s.id === user.stateId)
+      : states;
   const colorFor = (b: typeof branches[0]) => {
     const r = aprilReports.find(rp => rp.branchId === b.id);
     if (!r) return "bg-slate-200";
@@ -23,7 +34,13 @@ function ReportsPage() {
 
   return (
     <>
-      <PageHeader title="Branch Reports" description="Monthly compliance grid and full submission archive."
+      <PageHeader
+        title="Branch Reports"
+        description={
+          role === "STATE_PASTOR"
+            ? "Monthly compliance grid and submission archive for your state."
+            : "Monthly compliance grid and full submission archive."
+        }
         actions={<Link to="/dashboard/reports/submit"><Button className="!bg-[var(--accent-primary)] !text-white hover:!bg-[var(--accent-hover)]" size="sm"><Plus className="h-4 w-4 mr-1.5" /> Submit Report</Button></Link>}
       />
 
@@ -31,8 +48,8 @@ function ReportsPage() {
         <CardHeader><div><CardTitle>Compliance Grid · April 2025</CardTitle><p className="text-xs text-[--text-muted] mt-0.5">Each cell represents one branch.</p></div></CardHeader>
         <div className="p-5">
           <div className="space-y-3">
-            {states.map(s => {
-              const stB = branches.filter(b => b.stateId === s.id);
+            {gridStates.map(s => {
+              const stB = scopedBranches.filter(b => b.stateId === s.id);
               return (
                 <div key={s.id} className="flex items-center gap-3">
                   <div className="w-28 text-xs font-medium text-[--text-muted] shrink-0">{s.name}</div>
@@ -71,7 +88,7 @@ function ReportsPage() {
               </tr>
             </thead>
             <tbody className="divide-y divide-[--border-default]">
-              {reports.filter(r => r.submittedAt).slice(0, 30).map(r => (
+              {scopedReports.filter(r => r.submittedAt).slice(0, 30).map(r => (
                 <tr key={r.id} className="hover:bg-[--bg-base]/50">
                   <td className="px-5 py-3 font-medium">{branchName(r.branchId)}</td>
                   <td className="px-3 py-3 text-[--text-muted]">{stateName(branches.find(b => b.id === r.branchId)?.stateId)}</td>

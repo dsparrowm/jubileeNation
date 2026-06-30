@@ -10,6 +10,7 @@
 
 @theme inline {
   --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: "Plus Jakarta Sans", "Inter", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", "SFMono-Regular", Menlo, Consolas, monospace;
 
   --radius-sm: calc(var(--radius) - 4px);
@@ -20,6 +21,8 @@
 
   --color-bg-base: var(--bg-base);
   --color-bg-surface: var(--bg-surface);
+  --color-bg-elevated: var(--bg-elevated);
+  --color-bg-subtle: var(--bg-subtle);
   --color-bg-sidebar: var(--bg-sidebar);
   --color-bg-sidebar-surface: var(--bg-sidebar-surface);
   --color-text-primary: var(--text-primary);
@@ -35,6 +38,11 @@
   --color-state-success: var(--state-success);
   --color-state-warning: var(--state-warning);
   --color-state-info: var(--state-info);
+
+  --shadow-sm: var(--shadow-sm-token);
+  --shadow-md: var(--shadow-md-token);
+  --shadow-lg: var(--shadow-lg-token);
+  --shadow-card: var(--shadow-card-token);
 
   /* shadcn semantic mapping */
   --color-background: var(--bg-base);
@@ -73,11 +81,14 @@
 }
 
 :root {
-  --radius: 0.5rem;
+  --radius: 0.625rem;
   --bg-base: #F4F6FB;
   --bg-surface: #FFFFFF;
+  --bg-elevated: #FFFFFF;
+  --bg-subtle: #EEF1F8;
   --bg-sidebar: #0D1B3E;
   --bg-sidebar-surface: #162548;
+  --sidebar-gradient: linear-gradient(180deg, #0D1B3E 0%, #0A1530 100%);
   --text-primary: #111827;
   --text-muted: #6B7280;
   --text-sidebar: #E5E9F2;
@@ -91,6 +102,15 @@
   --state-success: #16A34A;
   --state-warning: #D97706;
   --state-info: #2563EB;
+  --shadow-sm-token: 0 1px 2px rgba(17, 24, 39, 0.04);
+  --shadow-md-token: 0 4px 12px rgba(17, 24, 39, 0.06);
+  --shadow-lg-token: 0 12px 32px rgba(17, 24, 39, 0.1);
+  --shadow-card-token: 0 1px 3px rgba(17, 24, 39, 0.04), 0 8px 24px rgba(17, 24, 39, 0.06);
+  --chart-gold: #C9A050;
+  --chart-navy: #0D1B3E;
+  --chart-info: #2563EB;
+  --chart-success: #16A34A;
+  --chart-warning: #D97706;
 }
 
 @layer base {
@@ -107,6 +127,10 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
+  h1, h2, h3, h4, .font-display {
+    font-family: var(--font-display);
+  }
+
   .font-mono, code, kbd, pre {
     font-family: var(--font-mono);
     font-feature-settings: "zero", "ss01";
@@ -118,3 +142,62 @@
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: #d4d8e0; border-radius: 6px; border: 2px solid transparent; background-clip: padding-box; }
 ::-webkit-scrollbar-thumb:hover { background: #b9bfca; background-clip: padding-box; border: 2px solid transparent; }
+
+.sidebar-gradient {
+  background: var(--sidebar-gradient);
+}
+
+.card-hover {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.card-hover:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-card-token);
+}
+
+/* FullCalendar — JNLOP brand overrides */
+.jn-fullcalendar {
+  --fc-border-color: var(--border-default);
+  --fc-button-bg-color: var(--bg-sidebar);
+  --fc-button-border-color: var(--bg-sidebar);
+  --fc-button-hover-bg-color: var(--bg-sidebar-surface);
+  --fc-button-hover-border-color: var(--bg-sidebar-surface);
+  --fc-button-active-bg-color: var(--accent-primary);
+  --fc-button-active-border-color: var(--accent-primary);
+  --fc-today-bg-color: color-mix(in srgb, var(--accent-primary) 8%, white);
+  --fc-page-bg-color: var(--bg-surface);
+  --fc-neutral-bg-color: var(--bg-subtle);
+  --fc-list-event-hover-bg-color: var(--bg-base);
+  font-family: var(--font-sans);
+}
+
+.jn-fullcalendar .fc-toolbar-title {
+  font-family: var(--font-display);
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.jn-fullcalendar .fc-col-header-cell-cushion,
+.jn-fullcalendar .fc-daygrid-day-number {
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+}
+
+.jn-fullcalendar .fc-event {
+  font-size: 0.6875rem;
+  border-radius: 4px;
+  padding: 1px 2px;
+}
+
+.jn-fullcalendar .fc-button {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  border-radius: 0.5rem;
+  text-transform: capitalize;
+}
+
+.jn-fullcalendar .fc-button-primary:not(:disabled).fc-button-active,
+.jn-fullcalendar .fc-button-primary:not(:disabled):active {
+  background-color: var(--accent-primary);
+  border-color: var(--accent-primary);
+}

@@ -6,6 +6,8 @@ import { Card } from "@/components/ui-kit/card";
 import { Button } from "@/components/ui/button";
 import { StatusBadge, RankBadge } from "@/components/ui-kit/badges";
 import { pastors, states, branchName, stateName } from "@/lib/data/seed";
+import { filterPastors } from "@/lib/data/filters";
+import { useRole } from "@/lib/role-context";
 import { formatDate, initials } from "@/lib/format";
 
 export const Route = createFileRoute("/dashboard/pastors/")({
@@ -13,13 +15,15 @@ export const Route = createFileRoute("/dashboard/pastors/")({
 });
 
 function PastorsPage() {
+  const { role, user } = useRole();
   const [view, setView] = React.useState<"grid" | "table">("grid");
   const [q, setQ] = React.useState("");
   const [stateFilter, setStateFilter] = React.useState("");
   const [rankFilter, setRankFilter] = React.useState("");
   const [statusFilter, setStatusFilter] = React.useState("");
 
-  const filtered = pastors.filter(p => {
+  const scoped = filterPastors({ role, user }, pastors);
+  const filtered = scoped.filter(p => {
     const name = `${p.firstName} ${p.lastName}`.toLowerCase();
     if (q && !name.includes(q.toLowerCase())) return false;
     if (stateFilter && p.stateId !== stateFilter) return false;
@@ -32,7 +36,7 @@ function PastorsPage() {
     <>
       <PageHeader
         title="Pastor Directory"
-        description={`${pastors.length} pastoral staff across the organisation.`}
+        description={`${scoped.length} pastoral staff across the organisation.`}
         actions={
           <Button className="!bg-[var(--accent-primary)] !text-white hover:!bg-[var(--accent-hover)]" size="sm">
             <Plus className="h-4 w-4 mr-1.5" /> Add Pastor

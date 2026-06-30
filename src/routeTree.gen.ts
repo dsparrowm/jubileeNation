@@ -13,23 +13,39 @@ import { Route as LoginRouteImport } from './routes/login'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as DashboardIndexRouteImport } from './routes/dashboard.index'
+import { Route as DashboardWalletRouteImport } from './routes/dashboard.wallet'
 import { Route as DashboardTransfersRouteImport } from './routes/dashboard.transfers'
+import { Route as DashboardTasksRouteImport } from './routes/dashboard.tasks'
 import { Route as DashboardStaffRouteImport } from './routes/dashboard.staff'
 import { Route as DashboardSettingsRouteImport } from './routes/dashboard.settings'
+import { Route as DashboardServicesRouteImport } from './routes/dashboard.services'
+import { Route as DashboardSearchRouteImport } from './routes/dashboard.search'
 import { Route as DashboardOrgStructureRouteImport } from './routes/dashboard.org-structure'
+import { Route as DashboardInboxRouteImport } from './routes/dashboard.inbox'
+import { Route as DashboardImpactRouteImport } from './routes/dashboard.impact'
 import { Route as DashboardFinanceRouteImport } from './routes/dashboard.finance'
 import { Route as DashboardDocumentsRouteImport } from './routes/dashboard.documents'
+import { Route as DashboardComplianceRouteImport } from './routes/dashboard.compliance'
+import { Route as DashboardCalendarRouteImport } from './routes/dashboard.calendar'
 import { Route as DashboardBranchesRouteImport } from './routes/dashboard.branches'
+import { Route as DashboardAuditRouteImport } from './routes/dashboard.audit'
+import { Route as DashboardApprovalsRouteImport } from './routes/dashboard.approvals'
 import { Route as DashboardAnnouncementsRouteImport } from './routes/dashboard.announcements'
 import { Route as DashboardAnalyticsRouteImport } from './routes/dashboard.analytics'
 import { Route as DashboardReportsIndexRouteImport } from './routes/dashboard.reports.index'
 import { Route as DashboardPastorsIndexRouteImport } from './routes/dashboard.pastors.index'
 import { Route as DashboardLeaveIndexRouteImport } from './routes/dashboard.leave.index'
 import { Route as DashboardEventsIndexRouteImport } from './routes/dashboard.events.index'
+import { Route as DashboardWalletMyRouteImport } from './routes/dashboard.wallet.my'
+import { Route as DashboardReportsWeeklyRouteImport } from './routes/dashboard.reports.weekly'
 import { Route as DashboardReportsSubmitRouteImport } from './routes/dashboard.reports.submit'
+import { Route as DashboardReportsMonthlyRouteImport } from './routes/dashboard.reports.monthly'
+import { Route as DashboardReportsBuilderRouteImport } from './routes/dashboard.reports.builder'
 import { Route as DashboardPastorsIdRouteImport } from './routes/dashboard.pastors.$id'
+import { Route as DashboardLeaveMyRouteImport } from './routes/dashboard.leave.my'
 import { Route as DashboardLeaveApplyRouteImport } from './routes/dashboard.leave.apply'
 import { Route as DashboardEventsIdRouteImport } from './routes/dashboard.events.$id'
+import { Route as DashboardReportsWeeklySubmitRouteImport } from './routes/dashboard.reports.weekly.submit'
 
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
@@ -51,9 +67,19 @@ const DashboardIndexRoute = DashboardIndexRouteImport.update({
   path: '/',
   getParentRoute: () => DashboardRoute,
 } as any)
+const DashboardWalletRoute = DashboardWalletRouteImport.update({
+  id: '/wallet',
+  path: '/wallet',
+  getParentRoute: () => DashboardRoute,
+} as any)
 const DashboardTransfersRoute = DashboardTransfersRouteImport.update({
   id: '/transfers',
   path: '/transfers',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardTasksRoute = DashboardTasksRouteImport.update({
+  id: '/tasks',
+  path: '/tasks',
   getParentRoute: () => DashboardRoute,
 } as any)
 const DashboardStaffRoute = DashboardStaffRouteImport.update({
@@ -66,9 +92,29 @@ const DashboardSettingsRoute = DashboardSettingsRouteImport.update({
   path: '/settings',
   getParentRoute: () => DashboardRoute,
 } as any)
+const DashboardServicesRoute = DashboardServicesRouteImport.update({
+  id: '/services',
+  path: '/services',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardSearchRoute = DashboardSearchRouteImport.update({
+  id: '/search',
+  path: '/search',
+  getParentRoute: () => DashboardRoute,
+} as any)
 const DashboardOrgStructureRoute = DashboardOrgStructureRouteImport.update({
   id: '/org-structure',
   path: '/org-structure',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardInboxRoute = DashboardInboxRouteImport.update({
+  id: '/inbox',
+  path: '/inbox',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardImpactRoute = DashboardImpactRouteImport.update({
+  id: '/impact',
+  path: '/impact',
   getParentRoute: () => DashboardRoute,
 } as any)
 const DashboardFinanceRoute = DashboardFinanceRouteImport.update({
@@ -81,9 +127,29 @@ const DashboardDocumentsRoute = DashboardDocumentsRouteImport.update({
   path: '/documents',
   getParentRoute: () => DashboardRoute,
 } as any)
+const DashboardComplianceRoute = DashboardComplianceRouteImport.update({
+  id: '/compliance',
+  path: '/compliance',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardCalendarRoute = DashboardCalendarRouteImport.update({
+  id: '/calendar',
+  path: '/calendar',
+  getParentRoute: () => DashboardRoute,
+} as any)
 const DashboardBranchesRoute = DashboardBranchesRouteImport.update({
   id: '/branches',
   path: '/branches',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardAuditRoute = DashboardAuditRouteImport.update({
+  id: '/audit',
+  path: '/audit',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardApprovalsRoute = DashboardApprovalsRouteImport.update({
+  id: '/approvals',
+  path: '/approvals',
   getParentRoute: () => DashboardRoute,
 } as any)
 const DashboardAnnouncementsRoute = DashboardAnnouncementsRouteImport.update({
@@ -116,14 +182,39 @@ const DashboardEventsIndexRoute = DashboardEventsIndexRouteImport.update({
   path: '/events/',
   getParentRoute: () => DashboardRoute,
 } as any)
+const DashboardWalletMyRoute = DashboardWalletMyRouteImport.update({
+  id: '/my',
+  path: '/my',
+  getParentRoute: () => DashboardWalletRoute,
+} as any)
+const DashboardReportsWeeklyRoute = DashboardReportsWeeklyRouteImport.update({
+  id: '/reports/weekly',
+  path: '/reports/weekly',
+  getParentRoute: () => DashboardRoute,
+} as any)
 const DashboardReportsSubmitRoute = DashboardReportsSubmitRouteImport.update({
   id: '/reports/submit',
   path: '/reports/submit',
   getParentRoute: () => DashboardRoute,
 } as any)
+const DashboardReportsMonthlyRoute = DashboardReportsMonthlyRouteImport.update({
+  id: '/reports/monthly',
+  path: '/reports/monthly',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardReportsBuilderRoute = DashboardReportsBuilderRouteImport.update({
+  id: '/reports/builder',
+  path: '/reports/builder',
+  getParentRoute: () => DashboardRoute,
+} as any)
 const DashboardPastorsIdRoute = DashboardPastorsIdRouteImport.update({
   id: '/pastors/$id',
   path: '/pastors/$id',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardLeaveMyRoute = DashboardLeaveMyRouteImport.update({
+  id: '/leave/my',
+  path: '/leave/my',
   getParentRoute: () => DashboardRoute,
 } as any)
 const DashboardLeaveApplyRoute = DashboardLeaveApplyRouteImport.update({
@@ -136,6 +227,12 @@ const DashboardEventsIdRoute = DashboardEventsIdRouteImport.update({
   path: '/events/$id',
   getParentRoute: () => DashboardRoute,
 } as any)
+const DashboardReportsWeeklySubmitRoute =
+  DashboardReportsWeeklySubmitRouteImport.update({
+    id: '/submit',
+    path: '/submit',
+    getParentRoute: () => DashboardReportsWeeklyRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -143,44 +240,76 @@ export interface FileRoutesByFullPath {
   '/login': typeof LoginRoute
   '/dashboard/analytics': typeof DashboardAnalyticsRoute
   '/dashboard/announcements': typeof DashboardAnnouncementsRoute
+  '/dashboard/approvals': typeof DashboardApprovalsRoute
+  '/dashboard/audit': typeof DashboardAuditRoute
   '/dashboard/branches': typeof DashboardBranchesRoute
+  '/dashboard/calendar': typeof DashboardCalendarRoute
+  '/dashboard/compliance': typeof DashboardComplianceRoute
   '/dashboard/documents': typeof DashboardDocumentsRoute
   '/dashboard/finance': typeof DashboardFinanceRoute
+  '/dashboard/impact': typeof DashboardImpactRoute
+  '/dashboard/inbox': typeof DashboardInboxRoute
   '/dashboard/org-structure': typeof DashboardOrgStructureRoute
+  '/dashboard/search': typeof DashboardSearchRoute
+  '/dashboard/services': typeof DashboardServicesRoute
   '/dashboard/settings': typeof DashboardSettingsRoute
   '/dashboard/staff': typeof DashboardStaffRoute
+  '/dashboard/tasks': typeof DashboardTasksRoute
   '/dashboard/transfers': typeof DashboardTransfersRoute
+  '/dashboard/wallet': typeof DashboardWalletRouteWithChildren
   '/dashboard/': typeof DashboardIndexRoute
   '/dashboard/events/$id': typeof DashboardEventsIdRoute
   '/dashboard/leave/apply': typeof DashboardLeaveApplyRoute
+  '/dashboard/leave/my': typeof DashboardLeaveMyRoute
   '/dashboard/pastors/$id': typeof DashboardPastorsIdRoute
+  '/dashboard/reports/builder': typeof DashboardReportsBuilderRoute
+  '/dashboard/reports/monthly': typeof DashboardReportsMonthlyRoute
   '/dashboard/reports/submit': typeof DashboardReportsSubmitRoute
+  '/dashboard/reports/weekly': typeof DashboardReportsWeeklyRouteWithChildren
+  '/dashboard/wallet/my': typeof DashboardWalletMyRoute
   '/dashboard/events/': typeof DashboardEventsIndexRoute
   '/dashboard/leave/': typeof DashboardLeaveIndexRoute
   '/dashboard/pastors/': typeof DashboardPastorsIndexRoute
   '/dashboard/reports/': typeof DashboardReportsIndexRoute
+  '/dashboard/reports/weekly/submit': typeof DashboardReportsWeeklySubmitRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
   '/dashboard/analytics': typeof DashboardAnalyticsRoute
   '/dashboard/announcements': typeof DashboardAnnouncementsRoute
+  '/dashboard/approvals': typeof DashboardApprovalsRoute
+  '/dashboard/audit': typeof DashboardAuditRoute
   '/dashboard/branches': typeof DashboardBranchesRoute
+  '/dashboard/calendar': typeof DashboardCalendarRoute
+  '/dashboard/compliance': typeof DashboardComplianceRoute
   '/dashboard/documents': typeof DashboardDocumentsRoute
   '/dashboard/finance': typeof DashboardFinanceRoute
+  '/dashboard/impact': typeof DashboardImpactRoute
+  '/dashboard/inbox': typeof DashboardInboxRoute
   '/dashboard/org-structure': typeof DashboardOrgStructureRoute
+  '/dashboard/search': typeof DashboardSearchRoute
+  '/dashboard/services': typeof DashboardServicesRoute
   '/dashboard/settings': typeof DashboardSettingsRoute
   '/dashboard/staff': typeof DashboardStaffRoute
+  '/dashboard/tasks': typeof DashboardTasksRoute
   '/dashboard/transfers': typeof DashboardTransfersRoute
+  '/dashboard/wallet': typeof DashboardWalletRouteWithChildren
   '/dashboard': typeof DashboardIndexRoute
   '/dashboard/events/$id': typeof DashboardEventsIdRoute
   '/dashboard/leave/apply': typeof DashboardLeaveApplyRoute
+  '/dashboard/leave/my': typeof DashboardLeaveMyRoute
   '/dashboard/pastors/$id': typeof DashboardPastorsIdRoute
+  '/dashboard/reports/builder': typeof DashboardReportsBuilderRoute
+  '/dashboard/reports/monthly': typeof DashboardReportsMonthlyRoute
   '/dashboard/reports/submit': typeof DashboardReportsSubmitRoute
+  '/dashboard/reports/weekly': typeof DashboardReportsWeeklyRouteWithChildren
+  '/dashboard/wallet/my': typeof DashboardWalletMyRoute
   '/dashboard/events': typeof DashboardEventsIndexRoute
   '/dashboard/leave': typeof DashboardLeaveIndexRoute
   '/dashboard/pastors': typeof DashboardPastorsIndexRoute
   '/dashboard/reports': typeof DashboardReportsIndexRoute
+  '/dashboard/reports/weekly/submit': typeof DashboardReportsWeeklySubmitRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -189,22 +318,38 @@ export interface FileRoutesById {
   '/login': typeof LoginRoute
   '/dashboard/analytics': typeof DashboardAnalyticsRoute
   '/dashboard/announcements': typeof DashboardAnnouncementsRoute
+  '/dashboard/approvals': typeof DashboardApprovalsRoute
+  '/dashboard/audit': typeof DashboardAuditRoute
   '/dashboard/branches': typeof DashboardBranchesRoute
+  '/dashboard/calendar': typeof DashboardCalendarRoute
+  '/dashboard/compliance': typeof DashboardComplianceRoute
   '/dashboard/documents': typeof DashboardDocumentsRoute
   '/dashboard/finance': typeof DashboardFinanceRoute
+  '/dashboard/impact': typeof DashboardImpactRoute
+  '/dashboard/inbox': typeof DashboardInboxRoute
   '/dashboard/org-structure': typeof DashboardOrgStructureRoute
+  '/dashboard/search': typeof DashboardSearchRoute
+  '/dashboard/services': typeof DashboardServicesRoute
   '/dashboard/settings': typeof DashboardSettingsRoute
   '/dashboard/staff': typeof DashboardStaffRoute
+  '/dashboard/tasks': typeof DashboardTasksRoute
   '/dashboard/transfers': typeof DashboardTransfersRoute
+  '/dashboard/wallet': typeof DashboardWalletRouteWithChildren
   '/dashboard/': typeof DashboardIndexRoute
   '/dashboard/events/$id': typeof DashboardEventsIdRoute
   '/dashboard/leave/apply': typeof DashboardLeaveApplyRoute
+  '/dashboard/leave/my': typeof DashboardLeaveMyRoute
   '/dashboard/pastors/$id': typeof DashboardPastorsIdRoute
+  '/dashboard/reports/builder': typeof DashboardReportsBuilderRoute
+  '/dashboard/reports/monthly': typeof DashboardReportsMonthlyRoute
   '/dashboard/reports/submit': typeof DashboardReportsSubmitRoute
+  '/dashboard/reports/weekly': typeof DashboardReportsWeeklyRouteWithChildren
+  '/dashboard/wallet/my': typeof DashboardWalletMyRoute
   '/dashboard/events/': typeof DashboardEventsIndexRoute
   '/dashboard/leave/': typeof DashboardLeaveIndexRoute
   '/dashboard/pastors/': typeof DashboardPastorsIndexRoute
   '/dashboard/reports/': typeof DashboardReportsIndexRoute
+  '/dashboard/reports/weekly/submit': typeof DashboardReportsWeeklySubmitRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -214,44 +359,76 @@ export interface FileRouteTypes {
     | '/login'
     | '/dashboard/analytics'
     | '/dashboard/announcements'
+    | '/dashboard/approvals'
+    | '/dashboard/audit'
     | '/dashboard/branches'
+    | '/dashboard/calendar'
+    | '/dashboard/compliance'
     | '/dashboard/documents'
     | '/dashboard/finance'
+    | '/dashboard/impact'
+    | '/dashboard/inbox'
     | '/dashboard/org-structure'
+    | '/dashboard/search'
+    | '/dashboard/services'
     | '/dashboard/settings'
     | '/dashboard/staff'
+    | '/dashboard/tasks'
     | '/dashboard/transfers'
+    | '/dashboard/wallet'
     | '/dashboard/'
     | '/dashboard/events/$id'
     | '/dashboard/leave/apply'
+    | '/dashboard/leave/my'
     | '/dashboard/pastors/$id'
+    | '/dashboard/reports/builder'
+    | '/dashboard/reports/monthly'
     | '/dashboard/reports/submit'
+    | '/dashboard/reports/weekly'
+    | '/dashboard/wallet/my'
     | '/dashboard/events/'
     | '/dashboard/leave/'
     | '/dashboard/pastors/'
     | '/dashboard/reports/'
+    | '/dashboard/reports/weekly/submit'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/login'
     | '/dashboard/analytics'
     | '/dashboard/announcements'
+    | '/dashboard/approvals'
+    | '/dashboard/audit'
     | '/dashboard/branches'
+    | '/dashboard/calendar'
+    | '/dashboard/compliance'
     | '/dashboard/documents'
     | '/dashboard/finance'
+    | '/dashboard/impact'
+    | '/dashboard/inbox'
     | '/dashboard/org-structure'
+    | '/dashboard/search'
+    | '/dashboard/services'
     | '/dashboard/settings'
     | '/dashboard/staff'
+    | '/dashboard/tasks'
     | '/dashboard/transfers'
+    | '/dashboard/wallet'
     | '/dashboard'
     | '/dashboard/events/$id'
     | '/dashboard/leave/apply'
+    | '/dashboard/leave/my'
     | '/dashboard/pastors/$id'
+    | '/dashboard/reports/builder'
+    | '/dashboard/reports/monthly'
     | '/dashboard/reports/submit'
+    | '/dashboard/reports/weekly'
+    | '/dashboard/wallet/my'
     | '/dashboard/events'
     | '/dashboard/leave'
     | '/dashboard/pastors'
     | '/dashboard/reports'
+    | '/dashboard/reports/weekly/submit'
   id:
     | '__root__'
     | '/'
@@ -259,22 +436,38 @@ export interface FileRouteTypes {
     | '/login'
     | '/dashboard/analytics'
     | '/dashboard/announcements'
+    | '/dashboard/approvals'
+    | '/dashboard/audit'
     | '/dashboard/branches'
+    | '/dashboard/calendar'
+    | '/dashboard/compliance'
     | '/dashboard/documents'
     | '/dashboard/finance'
+    | '/dashboard/impact'
+    | '/dashboard/inbox'
     | '/dashboard/org-structure'
+    | '/dashboard/search'
+    | '/dashboard/services'
     | '/dashboard/settings'
     | '/dashboard/staff'
+    | '/dashboard/tasks'
     | '/dashboard/transfers'
+    | '/dashboard/wallet'
     | '/dashboard/'
     | '/dashboard/events/$id'
     | '/dashboard/leave/apply'
+    | '/dashboard/leave/my'
     | '/dashboard/pastors/$id'
+    | '/dashboard/reports/builder'
+    | '/dashboard/reports/monthly'
     | '/dashboard/reports/submit'
+    | '/dashboard/reports/weekly'
+    | '/dashboard/wallet/my'
     | '/dashboard/events/'
     | '/dashboard/leave/'
     | '/dashboard/pastors/'
     | '/dashboard/reports/'
+    | '/dashboard/reports/weekly/submit'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -313,11 +506,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardIndexRouteImport
       parentRoute: typeof DashboardRoute
     }
+    '/dashboard/wallet': {
+      id: '/dashboard/wallet'
+      path: '/wallet'
+      fullPath: '/dashboard/wallet'
+      preLoaderRoute: typeof DashboardWalletRouteImport
+      parentRoute: typeof DashboardRoute
+    }
     '/dashboard/transfers': {
       id: '/dashboard/transfers'
       path: '/transfers'
       fullPath: '/dashboard/transfers'
       preLoaderRoute: typeof DashboardTransfersRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/tasks': {
+      id: '/dashboard/tasks'
+      path: '/tasks'
+      fullPath: '/dashboard/tasks'
+      preLoaderRoute: typeof DashboardTasksRouteImport
       parentRoute: typeof DashboardRoute
     }
     '/dashboard/staff': {
@@ -334,11 +541,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardSettingsRouteImport
       parentRoute: typeof DashboardRoute
     }
+    '/dashboard/services': {
+      id: '/dashboard/services'
+      path: '/services'
+      fullPath: '/dashboard/services'
+      preLoaderRoute: typeof DashboardServicesRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/search': {
+      id: '/dashboard/search'
+      path: '/search'
+      fullPath: '/dashboard/search'
+      preLoaderRoute: typeof DashboardSearchRouteImport
+      parentRoute: typeof DashboardRoute
+    }
     '/dashboard/org-structure': {
       id: '/dashboard/org-structure'
       path: '/org-structure'
       fullPath: '/dashboard/org-structure'
       preLoaderRoute: typeof DashboardOrgStructureRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/inbox': {
+      id: '/dashboard/inbox'
+      path: '/inbox'
+      fullPath: '/dashboard/inbox'
+      preLoaderRoute: typeof DashboardInboxRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/impact': {
+      id: '/dashboard/impact'
+      path: '/impact'
+      fullPath: '/dashboard/impact'
+      preLoaderRoute: typeof DashboardImpactRouteImport
       parentRoute: typeof DashboardRoute
     }
     '/dashboard/finance': {
@@ -355,11 +590,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardDocumentsRouteImport
       parentRoute: typeof DashboardRoute
     }
+    '/dashboard/compliance': {
+      id: '/dashboard/compliance'
+      path: '/compliance'
+      fullPath: '/dashboard/compliance'
+      preLoaderRoute: typeof DashboardComplianceRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/calendar': {
+      id: '/dashboard/calendar'
+      path: '/calendar'
+      fullPath: '/dashboard/calendar'
+      preLoaderRoute: typeof DashboardCalendarRouteImport
+      parentRoute: typeof DashboardRoute
+    }
     '/dashboard/branches': {
       id: '/dashboard/branches'
       path: '/branches'
       fullPath: '/dashboard/branches'
       preLoaderRoute: typeof DashboardBranchesRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/audit': {
+      id: '/dashboard/audit'
+      path: '/audit'
+      fullPath: '/dashboard/audit'
+      preLoaderRoute: typeof DashboardAuditRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/approvals': {
+      id: '/dashboard/approvals'
+      path: '/approvals'
+      fullPath: '/dashboard/approvals'
+      preLoaderRoute: typeof DashboardApprovalsRouteImport
       parentRoute: typeof DashboardRoute
     }
     '/dashboard/announcements': {
@@ -404,6 +667,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardEventsIndexRouteImport
       parentRoute: typeof DashboardRoute
     }
+    '/dashboard/wallet/my': {
+      id: '/dashboard/wallet/my'
+      path: '/my'
+      fullPath: '/dashboard/wallet/my'
+      preLoaderRoute: typeof DashboardWalletMyRouteImport
+      parentRoute: typeof DashboardWalletRoute
+    }
+    '/dashboard/reports/weekly': {
+      id: '/dashboard/reports/weekly'
+      path: '/reports/weekly'
+      fullPath: '/dashboard/reports/weekly'
+      preLoaderRoute: typeof DashboardReportsWeeklyRouteImport
+      parentRoute: typeof DashboardRoute
+    }
     '/dashboard/reports/submit': {
       id: '/dashboard/reports/submit'
       path: '/reports/submit'
@@ -411,11 +688,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardReportsSubmitRouteImport
       parentRoute: typeof DashboardRoute
     }
+    '/dashboard/reports/monthly': {
+      id: '/dashboard/reports/monthly'
+      path: '/reports/monthly'
+      fullPath: '/dashboard/reports/monthly'
+      preLoaderRoute: typeof DashboardReportsMonthlyRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/reports/builder': {
+      id: '/dashboard/reports/builder'
+      path: '/reports/builder'
+      fullPath: '/dashboard/reports/builder'
+      preLoaderRoute: typeof DashboardReportsBuilderRouteImport
+      parentRoute: typeof DashboardRoute
+    }
     '/dashboard/pastors/$id': {
       id: '/dashboard/pastors/$id'
       path: '/pastors/$id'
       fullPath: '/dashboard/pastors/$id'
       preLoaderRoute: typeof DashboardPastorsIdRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/leave/my': {
+      id: '/dashboard/leave/my'
+      path: '/leave/my'
+      fullPath: '/dashboard/leave/my'
+      preLoaderRoute: typeof DashboardLeaveMyRouteImport
       parentRoute: typeof DashboardRoute
     }
     '/dashboard/leave/apply': {
@@ -432,24 +730,71 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardEventsIdRouteImport
       parentRoute: typeof DashboardRoute
     }
+    '/dashboard/reports/weekly/submit': {
+      id: '/dashboard/reports/weekly/submit'
+      path: '/submit'
+      fullPath: '/dashboard/reports/weekly/submit'
+      preLoaderRoute: typeof DashboardReportsWeeklySubmitRouteImport
+      parentRoute: typeof DashboardReportsWeeklyRoute
+    }
   }
 }
+
+interface DashboardWalletRouteChildren {
+  DashboardWalletMyRoute: typeof DashboardWalletMyRoute
+}
+
+const DashboardWalletRouteChildren: DashboardWalletRouteChildren = {
+  DashboardWalletMyRoute: DashboardWalletMyRoute,
+}
+
+const DashboardWalletRouteWithChildren = DashboardWalletRoute._addFileChildren(
+  DashboardWalletRouteChildren,
+)
+
+interface DashboardReportsWeeklyRouteChildren {
+  DashboardReportsWeeklySubmitRoute: typeof DashboardReportsWeeklySubmitRoute
+}
+
+const DashboardReportsWeeklyRouteChildren: DashboardReportsWeeklyRouteChildren =
+  {
+    DashboardReportsWeeklySubmitRoute: DashboardReportsWeeklySubmitRoute,
+  }
+
+const DashboardReportsWeeklyRouteWithChildren =
+  DashboardReportsWeeklyRoute._addFileChildren(
+    DashboardReportsWeeklyRouteChildren,
+  )
 
 interface DashboardRouteChildren {
   DashboardAnalyticsRoute: typeof DashboardAnalyticsRoute
   DashboardAnnouncementsRoute: typeof DashboardAnnouncementsRoute
+  DashboardApprovalsRoute: typeof DashboardApprovalsRoute
+  DashboardAuditRoute: typeof DashboardAuditRoute
   DashboardBranchesRoute: typeof DashboardBranchesRoute
+  DashboardCalendarRoute: typeof DashboardCalendarRoute
+  DashboardComplianceRoute: typeof DashboardComplianceRoute
   DashboardDocumentsRoute: typeof DashboardDocumentsRoute
   DashboardFinanceRoute: typeof DashboardFinanceRoute
+  DashboardImpactRoute: typeof DashboardImpactRoute
+  DashboardInboxRoute: typeof DashboardInboxRoute
   DashboardOrgStructureRoute: typeof DashboardOrgStructureRoute
+  DashboardSearchRoute: typeof DashboardSearchRoute
+  DashboardServicesRoute: typeof DashboardServicesRoute
   DashboardSettingsRoute: typeof DashboardSettingsRoute
   DashboardStaffRoute: typeof DashboardStaffRoute
+  DashboardTasksRoute: typeof DashboardTasksRoute
   DashboardTransfersRoute: typeof DashboardTransfersRoute
+  DashboardWalletRoute: typeof DashboardWalletRouteWithChildren
   DashboardIndexRoute: typeof DashboardIndexRoute
   DashboardEventsIdRoute: typeof DashboardEventsIdRoute
   DashboardLeaveApplyRoute: typeof DashboardLeaveApplyRoute
+  DashboardLeaveMyRoute: typeof DashboardLeaveMyRoute
   DashboardPastorsIdRoute: typeof DashboardPastorsIdRoute
+  DashboardReportsBuilderRoute: typeof DashboardReportsBuilderRoute
+  DashboardReportsMonthlyRoute: typeof DashboardReportsMonthlyRoute
   DashboardReportsSubmitRoute: typeof DashboardReportsSubmitRoute
+  DashboardReportsWeeklyRoute: typeof DashboardReportsWeeklyRouteWithChildren
   DashboardEventsIndexRoute: typeof DashboardEventsIndexRoute
   DashboardLeaveIndexRoute: typeof DashboardLeaveIndexRoute
   DashboardPastorsIndexRoute: typeof DashboardPastorsIndexRoute
@@ -459,18 +804,32 @@ interface DashboardRouteChildren {
 const DashboardRouteChildren: DashboardRouteChildren = {
   DashboardAnalyticsRoute: DashboardAnalyticsRoute,
   DashboardAnnouncementsRoute: DashboardAnnouncementsRoute,
+  DashboardApprovalsRoute: DashboardApprovalsRoute,
+  DashboardAuditRoute: DashboardAuditRoute,
   DashboardBranchesRoute: DashboardBranchesRoute,
+  DashboardCalendarRoute: DashboardCalendarRoute,
+  DashboardComplianceRoute: DashboardComplianceRoute,
   DashboardDocumentsRoute: DashboardDocumentsRoute,
   DashboardFinanceRoute: DashboardFinanceRoute,
+  DashboardImpactRoute: DashboardImpactRoute,
+  DashboardInboxRoute: DashboardInboxRoute,
   DashboardOrgStructureRoute: DashboardOrgStructureRoute,
+  DashboardSearchRoute: DashboardSearchRoute,
+  DashboardServicesRoute: DashboardServicesRoute,
   DashboardSettingsRoute: DashboardSettingsRoute,
   DashboardStaffRoute: DashboardStaffRoute,
+  DashboardTasksRoute: DashboardTasksRoute,
   DashboardTransfersRoute: DashboardTransfersRoute,
+  DashboardWalletRoute: DashboardWalletRouteWithChildren,
   DashboardIndexRoute: DashboardIndexRoute,
   DashboardEventsIdRoute: DashboardEventsIdRoute,
   DashboardLeaveApplyRoute: DashboardLeaveApplyRoute,
+  DashboardLeaveMyRoute: DashboardLeaveMyRoute,
   DashboardPastorsIdRoute: DashboardPastorsIdRoute,
+  DashboardReportsBuilderRoute: DashboardReportsBuilderRoute,
+  DashboardReportsMonthlyRoute: DashboardReportsMonthlyRoute,
   DashboardReportsSubmitRoute: DashboardReportsSubmitRoute,
+  DashboardReportsWeeklyRoute: DashboardReportsWeeklyRouteWithChildren,
   DashboardEventsIndexRoute: DashboardEventsIndexRoute,
   DashboardLeaveIndexRoute: DashboardLeaveIndexRoute,
   DashboardPastorsIndexRoute: DashboardPastorsIndexRoute,

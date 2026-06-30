@@ -6,6 +6,8 @@ import { Card } from "@/components/ui-kit/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui-kit/badges";
 import { events } from "@/lib/data/seed";
+import { filterEvents } from "@/lib/data/filters";
+import { useRole } from "@/lib/role-context";
 import { formatDate } from "@/lib/format";
 
 export const Route = createFileRoute("/dashboard/events/")({ component: EventsPage });
@@ -15,6 +17,8 @@ const typeTone: Record<string, "gold" | "info" | "indigo" | "purple" | "success"
 };
 
 function EventsPage() {
+  const { role, user } = useRole();
+  const scoped = filterEvents({ role, user }, events);
   const [view, setView] = React.useState<"grid" | "calendar">("grid");
 
   return (
@@ -32,7 +36,7 @@ function EventsPage() {
 
       {view === "grid" ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {events.map(ev => (
+          {scoped.map(ev => (
             <Link key={ev.id} to="/dashboard/events/$id" params={{ id: ev.id }} className="group">
               <Card className="hover:border-[--accent-primary]/40 hover:shadow-md transition h-full">
                 <div className="p-5">
@@ -56,7 +60,7 @@ function EventsPage() {
           <div className="p-4">
             <div className="text-sm font-semibold mb-3">Upcoming · 2025</div>
             <div className="space-y-2">
-              {events.map(ev => (
+              {scoped.map(ev => (
                 <div key={ev.id} className="flex items-center gap-4 p-3 rounded-md border border-[--border-default] hover:bg-[--bg-base]/50">
                   <div className="text-center shrink-0 w-14">
                     <div className="text-[10px] uppercase text-[--accent-primary] font-semibold">{new Date(ev.startDate).toLocaleString("en", { month: "short" })}</div>

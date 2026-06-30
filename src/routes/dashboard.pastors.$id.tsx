@@ -8,6 +8,7 @@ import { StatusBadge, RankBadge } from "@/components/ui-kit/badges";
 import { findPastor, branchName, stateName, transfers, leaveRequests, branches, auditFeed } from "@/lib/data/seed";
 import { formatDate, formatRelative, initials, daysBetween } from "@/lib/format";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import { useRole } from "@/lib/role-context";
 
 export const Route = createFileRoute("/dashboard/pastors/$id")({
   component: PastorProfilePage,
@@ -15,14 +16,13 @@ export const Route = createFileRoute("/dashboard/pastors/$id")({
 
 function PastorProfilePage() {
   const { id } = Route.useParams();
+  const { role, user } = useRole();
   const p = findPastor(id);
   if (!p) {
-    return (
-      <div className="text-center py-20">
-        <p className="text-sm text-[--text-muted]">Pastor not found.</p>
-        <Link to="/dashboard/pastors" className="text-[--accent-primary] text-sm font-medium mt-2 inline-block">Back to directory</Link>
-      </div>
-    );
+    throw notFound();
+  }
+  if (role === "STATE_PASTOR" && p.stateId !== user.stateId) {
+    throw notFound();
   }
 
   const pastorTransfers = transfers.filter(t => t.pastorId === p.id);

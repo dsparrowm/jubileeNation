@@ -8,6 +8,7 @@ interface StatCardProps {
   value: React.ReactNode;
   trend?: { dir: "up" | "down"; value: string };
   hint?: string;
+  sparkline?: React.ReactNode;
   className?: string;
   iconTone?: "gold" | "navy" | "info" | "success" | "warning" | "error";
 }
@@ -21,27 +22,47 @@ const iconToneCls: Record<NonNullable<StatCardProps["iconTone"]>, string> = {
   error: "bg-red-50 text-[--state-error]",
 };
 
-export function StatCard({ icon: Icon, label, value, trend, hint, iconTone = "gold", className }: StatCardProps) {
+export function StatCard({
+  icon: Icon,
+  label,
+  value,
+  trend,
+  hint,
+  sparkline,
+  iconTone = "gold",
+  className,
+}: StatCardProps) {
   return (
-    <div className={cn("rounded-lg border border-[--border-default] bg-[--bg-surface] p-5 shadow-sm", className)}>
+    <div
+      className={cn(
+        "card-hover rounded-xl border border-[--border-default] bg-[--bg-surface] p-5",
+        "shadow-[var(--shadow-card-token)]",
+        className,
+      )}
+    >
       <div className="flex items-start justify-between">
-        <div className={cn("flex h-9 w-9 items-center justify-center rounded-md", iconToneCls[iconTone])}>
-          <Icon className="h-4.5 w-4.5 h-[18px] w-[18px]" />
+        <div className={cn("flex h-10 w-10 items-center justify-center rounded-xl", iconToneCls[iconTone])}>
+          <Icon className="h-[18px] w-[18px]" />
         </div>
         {trend && (
-          <span className={cn(
-            "inline-flex items-center gap-0.5 rounded px-1.5 py-0.5 text-[11px] font-medium font-mono",
-            trend.dir === "up" ? "text-[--state-success] bg-green-50" : "text-[--state-error] bg-red-50"
-          )}>
+          <span
+            className={cn(
+              "inline-flex items-center gap-0.5 rounded-md px-2 py-0.5 text-[11px] font-medium font-mono",
+              trend.dir === "up" ? "text-[--state-success] bg-green-50" : "text-[--state-error] bg-red-50",
+            )}
+          >
             {trend.dir === "up" ? <ArrowUp className="h-3 w-3" /> : <ArrowDown className="h-3 w-3" />}
             {trend.value}
           </span>
         )}
       </div>
       <div className="mt-4">
-        <div className="font-mono text-2xl font-bold tracking-tight text-[--text-primary]">{value}</div>
-        <div className="mt-1 text-xs text-[--text-muted] font-medium">{label}</div>
-        {hint && <div className="mt-1 text-[11px] text-[--text-muted]">{hint}</div>}
+        <div className="font-display font-mono text-3xl font-bold tracking-tight text-[--text-primary]">
+          {value}
+        </div>
+        <div className="mt-1 text-sm text-[--text-muted] font-medium">{label}</div>
+        {hint && <div className="mt-1 text-xs text-[--text-muted]">{hint}</div>}
+        {sparkline && <div className="mt-3 h-8">{sparkline}</div>}
       </div>
     </div>
   );
